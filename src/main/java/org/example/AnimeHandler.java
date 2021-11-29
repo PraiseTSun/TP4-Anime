@@ -27,7 +27,7 @@ public class AnimeHandler {
     private final String RATED_KEY = "c";
     private final String RECHERCHE_KEY = "r";
     private final String QUITTER_KEY = "q";
-    private final List<String> MAIN_MENU_LIST = new ArrayList<>(List.of(
+    private final List<String> MAIN_MENU_LIST = new ArrayList<String>(List.of(
             REQUETE_KEY,
             TYPE_KEY,
             RATED_KEY,
@@ -57,7 +57,7 @@ public class AnimeHandler {
         System.out.println(RECHERCHE_KEY + ". Rechercher");
         System.out.println(QUITTER_KEY + ". Quitter");
         System.out.println(LINE);
-        printChoose((ArrayList) MAIN_MENU_LIST);
+        printChoice(MAIN_MENU_LIST);
         System.out.println("Enter command → ");
     }
 
@@ -84,7 +84,7 @@ public class AnimeHandler {
         return false;
     }
 
-    private void printChoose (ArrayList elements){
+    private void printChoice (List<String> elements){
         System.out.print("Choose one of : ");
         for (int i = 0; i < elements.size(); i++) {
             System.out.print(elements.get(i));
