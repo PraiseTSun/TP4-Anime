@@ -24,7 +24,12 @@ public class AnimeHandler {
             QUITTER_KEY
     ));
 
-
+    public void animeMain(){
+        while(true){
+            printMainMenu();
+            getCommandLineInput();
+        }
+    }
 
     private void printMainMenu(){
         System.out.println(PROGRAMME_TITLE);
