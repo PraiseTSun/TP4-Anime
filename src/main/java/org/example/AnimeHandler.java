@@ -72,6 +72,8 @@ public class AnimeHandler {
                     try {rechercheHandler();} catch (Exception e) {
                         System.out.println("Error " + e);
                     }
+
+
                     break;
             }
         }
@@ -95,15 +97,16 @@ public class AnimeHandler {
             return;
 
 
-        String line;
+        String content = "";
         try(BufferedReader r = new BufferedReader(new InputStreamReader(conn.getInputStream()))){
-            while((line = r.readLine()) != null)
-                System.out.println(line);
+            String line;
+            while((line = r.readLine()) != null){
+                content += line;
+            }
         }
 
         ObjectMapper mapper = new ObjectMapper();
-        rechercheResult = mapper.readValue(line, JikanResult.class);
-        rechercheResult.toString();
+        rechercheResult = mapper.readValue(content, JikanResult.class);
         //Etape 4 - Fermer la connexion
         conn.disconnect();
     }
