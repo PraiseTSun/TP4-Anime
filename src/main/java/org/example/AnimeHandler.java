@@ -36,6 +36,7 @@ public class AnimeHandler {
     ));
 
     private final List<String> TYPE_LIST = new ArrayList<String>(List.of("*", "tv", "movie", "ova"));
+    private final List<String> RATED_LIST = new ArrayList<String>(List.of("*", "g", "pg", "pg13"));
 
     private String requetValue = "";
     private String typeValue = "";
@@ -43,8 +44,12 @@ public class AnimeHandler {
 
 
     public void animeMainMenuHandler(){
-        defaultValue();
+        defaultValues();
         String commande = "";
+
+        System.out.println(PROGRAMME_TITLE);
+        System.out.println();
+
         while(!commande.equals("q")){
             printMainMenu();
             commande = getCommandLineInput();
@@ -52,6 +57,9 @@ public class AnimeHandler {
             switch (commande){
                 case TYPE_KEY:
                     typeHandler();
+                    break;
+                case RATED_KEY:
+                    ratedHandler();
                     break;
             }
         }
@@ -69,7 +77,17 @@ public class AnimeHandler {
             System.out.println("Type " + commande + " is not allow.");
     }
 
+    private void ratedHandler(){
+        String commande = "";
+        System.out.println("Enter rated");
+        printChoice(RATED_LIST);
+        commande = getCommandLineInput();
 
+        if(isElementAccepted(commande, RATED_LIST))
+            ratedValue = commande;
+        else
+            System.out.println("Rated " + commande + " is not allow.");
+    }
 
     private boolean isElementAccepted (String element, List<String> list) {
         for (String e : list) {
@@ -97,8 +115,6 @@ public class AnimeHandler {
     }
 
     private void printMainMenu(){
-        System.out.println(PROGRAMME_TITLE);
-        System.out.println();
         System.out.println();
         System.out.println(LINE);
         System.out.println(REQUETE_KEY  + ". Requete : '" + requetValue + "'");
