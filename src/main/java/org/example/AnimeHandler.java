@@ -24,6 +24,7 @@ public class AnimeHandler {
                                            "*                  ANIME API QUERY PRO V1.4                    *\n" +
                                            "****************************************************************";
     private final String LINE =            "----------------------------------------------------------------";
+    private final String LINE_INFO = "+" + LINE + "+";
     private final String REQUETE_KEY = "a";
     private final String TYPE_KEY = "b";
     private final String RATED_KEY = "c";
@@ -93,21 +94,17 @@ public class AnimeHandler {
         while(!commande.equals(QUITTER_KEY)){
             printResultsAnalyse(animesList);
             commande = getCommandLineInput();
+
+            if(!commande.equals(QUITTER_KEY))
+                printAnimeInfo(animesList.get(Integer.parseInt(commande) - 1));
         }
     }
 
     private AnimeCharacters getCharacters(int id) throws Exception {
-        //Etaoe 1 - creation de la requete
-        URL url = new URL(JIKAN_URL + TYPE + "/" + id + "characters_staff");
+        URL url = new URL(JIKAN_URL + TYPE + "/" + id + "/characters_staff");
         HttpURLConnection conn = (HttpsURLConnection) url.openConnection();
 
-        //Etape 2 - Parametrer la requete
         conn.setRequestMethod("GET");
-
-        //Etape 3 - Envoyer la requete et gerer la reponse
-        int statusCode = conn.getResponseCode();
-        if(!isStatusCodeAccepted(statusCode))
-            return;
 
 
         String content = "";
@@ -195,6 +192,16 @@ public class AnimeHandler {
         if (statusCode == 200)
             return true;
         return false;
+    }
+
+    private void printAnimeInfo(Anime anime){
+        AnimeCharacters characters;
+        try { characters = getCharacters(anime.getMal_id()); } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        System.out.println(LINE_INFO);
+        System.out.println(LINE_INFO);
     }
 
     private void printChoice (List<String> elements){
