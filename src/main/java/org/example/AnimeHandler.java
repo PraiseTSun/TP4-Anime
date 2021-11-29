@@ -35,6 +35,8 @@ public class AnimeHandler {
             QUITTER_KEY
     ));
 
+    private final List<String> TYPE_LIST = new ArrayList<String>(List.of("*", "tv", "movie", "ova"));
+
     public void animeMainMenuHandler(){
         String commande = "";
         while(!commande.equals("q")){
@@ -71,6 +73,14 @@ public class AnimeHandler {
         String command = "";
         try {command = reader.readLine();} catch (IOException e) {}
         return command;
+    }
+
+    private boolean isTypeAccepted (String type) {
+        for (String element : TYPE_LIST) {
+            if(element.equals(type))
+                return true;
+        }
+        return false;
     }
 
     private boolean isStatusCodeAccepted (int statusCode){
