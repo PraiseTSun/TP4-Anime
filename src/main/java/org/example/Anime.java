@@ -150,4 +150,23 @@ public class Anime {
     public void setRated(String rated) {
         this.rated = rated;
     }
+
+    @Override
+    public String toString() {
+        return "Anime{" +
+                "mal_id=" + mal_id +
+                ", url='" + url + '\'' +
+                ", image_url='" + image_url + '\'' +
+                ", title='" + title + '\'' +
+                ", airing=" + airing +
+                ", synopsis='" + synopsis + '\'' +
+                ", type='" + type + '\'' +
+                ", episodes=" + episodes +
+                ", score=" + score +
+                ", start_date='" + start_date + '\'' +
+                ", end_date='" + end_date + '\'' +
+                ", members=" + members +
+                ", rated='" + rated + '\'' +
+                '}';
+    }
 }

@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Arrays;
+
 public class JikanResult {
     private String request_hash;
     private boolean request_cached;
@@ -61,5 +63,16 @@ public class JikanResult {
 
     public void setLast_page(int last_page) {
         this.last_page = last_page;
+    }
+
+    @Override
+    public String toString() {
+        return "JikanResult{" +
+                "request_hash='" + request_hash + '\'' +
+                ", request_cached=" + request_cached +
+                ", request_cache_expiry=" + request_cache_expiry +
+                ", results=" + Arrays.toString(results) +
+                ", last_page=" + last_page +
+                '}';
     }
 }

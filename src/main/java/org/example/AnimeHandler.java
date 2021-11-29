@@ -40,13 +40,14 @@ public class AnimeHandler {
     private final List<String> TYPE_LIST = new ArrayList<String>(List.of("*", "tv", "movie", "ova"));
     private final List<String> RATED_LIST = new ArrayList<String>(List.of("*", "g", "pg", "pg13"));
 
-    private String requetValue = "";
-    private String typeValue = "";
-    private String ratedValue = "";
+    private String requetValue = "cowboy";
+    private String typeValue = "tv";
+    private String ratedValue = "g";
+    private JikanResult rechercheResult;
 
 
     public void animeMainMenuHandler(){
-        defaultValues();
+        //defaultValues();
         String commande = "";
 
         System.out.println(PROGRAMME_TITLE);
@@ -68,7 +69,9 @@ public class AnimeHandler {
                     break;
 
                 case RECHERCHE_KEY:
-                    try {rechercheHandler();} catch (Exception e) {}
+                    try {rechercheHandler();} catch (Exception e) {
+                        System.out.println("Error " + e);
+                    }
                     break;
             }
         }
@@ -99,7 +102,8 @@ public class AnimeHandler {
         }
 
         ObjectMapper mapper = new ObjectMapper();
-        JikanResult p2 = mapper.readValue(line, JikanResult.class);
+        rechercheResult = mapper.readValue(line, JikanResult.class);
+        rechercheResult.toString();
         //Etape 4 - Fermer la connexion
         conn.disconnect();
     }
