@@ -53,7 +53,7 @@ public class AnimeHandler {
         System.out.println(PROGRAMME_TITLE);
         System.out.println();
 
-        while(!commande.equals("q")){
+        while(!commande.equals(QUITTER_KEY)){
             printMainMenu();
             commande = getCommandLineInput();
 
@@ -73,9 +73,26 @@ public class AnimeHandler {
                         System.out.println("Error " + e);
                     }
 
-
+                    analyseResults();
                     break;
             }
+        }
+    }
+
+    private void analyseResults(){
+        String commande = "";
+        List<Anime> animesList= new ArrayList<>();
+
+        for (Anime a : rechercheResult.getResults()) {
+            if(isElementAccepted(a.getRated(), RATED_LIST))
+                animesList.add(a);
+            if(animesList.size() == 5)
+                break;
+        }
+
+        while(!commande.equals(QUITTER_KEY)){
+            printResultsAnalyse(animesList);
+            commande = getCommandLineInput();
         }
     }
 
@@ -137,7 +154,7 @@ public class AnimeHandler {
 
     private boolean isElementAccepted (String element, List<String> list) {
         for (String e : list) {
-            if(e.equals(element))
+            if(e.equals(element.toLowerCase()))
                 return true;
         }
         return false;
@@ -171,6 +188,20 @@ public class AnimeHandler {
         System.out.println(QUITTER_KEY + ". Quitter");
         System.out.println(LINE);
         printChoice(MAIN_MENU_LIST);
+    }
+
+    private void printResultsAnalyse(List<Anime> animesList){
+        System.out.println(LINE);
+        for(int i = 1; i <= animesList.size(); i++)
+            System.out.println(i + ". " + animesList.get(i-1).getTitle());
+        System.out.println(LINE);
+        System.out.println(QUITTER_KEY + ". Quitter");
+        System.out.println(LINE);
+        System.out.print("Choose one of : ");
+        for(int i = 1; i <= animesList.size(); i++){
+            System.out.print(i + ",");
+        }
+        System.out.println("q");
     }
 
     private String getStatusCode (int statusCode){
