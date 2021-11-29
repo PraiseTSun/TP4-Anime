@@ -1,5 +1,7 @@
 package org.example;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -64,8 +66,42 @@ public class AnimeHandler {
                 case RATED_KEY:
                     ratedHandler();
                     break;
+
+                case RECHERCHE_KEY:
+                    try {rechercheHandler();} catch (Exception e) {}
+                    break;
             }
         }
+    }
+
+    private void rechercheHandler() throws Exception {
+        //Etaoe 1 - creation de la requete
+        URL url = new URL(JIKAN_URL + SEARCH_EXTENTION + TYPE +
+                STRING_SEARCH_EXTENTION + URLEncoder.encode(requetValue, StandardCharsets.UTF_8) +
+                "&type=" + typeValue +
+                "&rated=" + ratedValue
+                );
+        HttpURLConnection conn = (HttpsURLConnection) url.openConnection();
+
+        //Etape 2 - Parametrer la requete
+        conn.setRequestMethod("GET");
+
+        //Etape 3 - Envoyer la requete et gerer la reponse
+        int statusCode = conn.getResponseCode();
+        if(!isStatusCodeAccepted(statusCode))
+            return;
+
+
+        String line;
+        try(BufferedReader r = new BufferedReader(new InputStreamReader(conn.getInputStream()))){
+            while((line = r.readLine()) != null)
+                System.out.println(line);
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        JikanResult p2 = mapper.readValue(line, JikanResult.class);
+        //Etape 4 - Fermer la connexion
+        conn.disconnect();
     }
 
     private void typeHandler(){
