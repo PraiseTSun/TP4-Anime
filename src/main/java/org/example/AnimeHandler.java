@@ -1,5 +1,8 @@
 package org.example;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,5 +45,13 @@ public class AnimeHandler {
         }
         System.out.println();
         System.out.println("Enter command → ");
+    }
+
+    private String getCommandLineInput(){
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        String command = "";
+        try {command = reader.readLine();} catch (IOException e) {}
+        return command;
     }
 }
