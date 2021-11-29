@@ -7,6 +7,6 @@ package org.example;
 public class App {
     public static void main( String[] args ) {
         AnimeHandler animeHandler = new AnimeHandler();
-        animeHandler.animeMain();
+        animeHandler.animeMainMenuHandler();
     }
 }

@@ -16,6 +16,7 @@ public class AnimeHandler {
     private final String JIKAN_URL = "https://api.jikan.moe/v3";
     private final String TYPE = "/anime";
     private final String SEARCH_EXTENTION = "/search";
+    private final String STRING_SEARCH_EXTENTION = "?q=";
 
     private final String PROGRAMME_TITLE = "****************************************************************\n" +
                                            "*                  ANIME API QUERY PRO V1.4                    *\n" +
@@ -34,9 +35,9 @@ public class AnimeHandler {
             QUITTER_KEY
     ));
 
-    public void animeMain(){
+    public void animeMainMenuHandler(){
         String commande = "";
-        while(commande != "q"){
+        while(!commande.equals("q")){
             printMainMenu();
             commande = getCommandLineInput();
         }
