@@ -55,6 +55,9 @@ public class AnimeHandler {
             commande = getCommandLineInput();
 
             switch (commande){
+                case REQUETE_KEY:
+                    requetValue = getCommandLineInput();
+                    break;
                 case TYPE_KEY:
                     typeHandler();
                     break;
