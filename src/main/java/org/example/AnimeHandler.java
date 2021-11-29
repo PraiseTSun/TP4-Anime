@@ -36,7 +36,7 @@ public class AnimeHandler {
 
     public void animeMain() throws Exception {
         jikanUrl = new URL("https://api.jikan.moe/v3/anime" +
-                "/1");
+                "/-1");
         conn = (HttpsURLConnection) jikanUrl.openConnection();
         System.out.println(jikanUrl);
         int statusCode = conn.getResponseCode();
@@ -80,6 +80,13 @@ public class AnimeHandler {
         String command = "";
         try {command = reader.readLine();} catch (IOException e) {}
         return command;
+    }
+
+    private boolean isStatusCodeAccepted (int statusCode){
+        System.out.println(getStatusCode(statusCode));
+        if (statusCode = 200)
+            return true;
+        return false;
     }
 
     private String getStatusCode (int statusCode){
