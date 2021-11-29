@@ -23,5 +23,24 @@ public class AnimeHandler {
 
 
 
-
+    private void printMainMenu(){
+        System.out.println(PROGRAMME_TITLE);
+        System.out.println();
+        System.out.println();
+        System.out.println(LINE);
+        System.out.println(REQUETE_KEY  + ". Requete : ''");
+        System.out.println(TYPE_KEY     + ". Type    : '*'");
+        System.out.println(RATED_KEY    + ". Rated   : '*'");
+        System.out.println(LINE);
+        System.out.println(RECHERCHE_KEY + ". Rechercher");
+        System.out.println(QUITTER_KEY + ". Quitter");
+        System.out.println(LINE);
+        for (int i = 0; i < CHOOSE_LIST.size(); i++) {
+            System.out.print(CHOOSE_LIST.get(i) + ",");
+            if(i != CHOOSE_LIST.size()-2)
+                System.out.print(",");
+        }
+        System.out.println();
+        System.out.println("Enter command → ");
+    }
 }
