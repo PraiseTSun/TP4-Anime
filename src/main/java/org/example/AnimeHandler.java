@@ -63,7 +63,7 @@ public class AnimeHandler {
         printChoice(TYPE_LIST);
         commande = getCommandLineInput();
 
-        if(isTypeAccepted(commande))
+        if(isElementAccepted(commande, TYPE_LIST))
             typeValue = commande;
         else
             System.out.println("Type " + commande + " is not allow.");
@@ -71,9 +71,9 @@ public class AnimeHandler {
 
 
 
-    private boolean isTypeAccepted (String type) {
-        for (String element : TYPE_LIST) {
-            if(element.equals(type))
+    private boolean isElementAccepted (String element, List<String> list) {
+        for (String e : list) {
+            if(e.equals(element))
                 return true;
         }
         return false;
