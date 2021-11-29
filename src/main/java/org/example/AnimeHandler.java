@@ -96,6 +96,38 @@ public class AnimeHandler {
         }
     }
 
+    private void getCharacters(int id) throws Exception {
+        //Etaoe 1 - creation de la requete
+        URL url = new URL(JIKAN_URL + SEARCH_EXTENTION + TYPE +
+                STRING_SEARCH_EXTENTION + URLEncoder.encode(requetValue, StandardCharsets.UTF_8) +
+                "&type=" + typeValue +
+                "&rated=" + ratedValue
+        );
+        HttpURLConnection conn = (HttpsURLConnection) url.openConnection();
+
+        //Etape 2 - Parametrer la requete
+        conn.setRequestMethod("GET");
+
+        //Etape 3 - Envoyer la requete et gerer la reponse
+        int statusCode = conn.getResponseCode();
+        if(!isStatusCodeAccepted(statusCode))
+            return;
+
+
+        String content = "";
+        try(BufferedReader r = new BufferedReader(new InputStreamReader(conn.getInputStream()))){
+            String line;
+            while((line = r.readLine()) != null){
+                content += line;
+            }
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        rechercheResult = mapper.readValue(content, JikanResult.class);
+        //Etape 4 - Fermer la connexion
+        conn.disconnect();
+    }
+
     private void rechercheHandler() throws Exception {
         //Etaoe 1 - creation de la requete
         URL url = new URL(JIKAN_URL + SEARCH_EXTENTION + TYPE +
