@@ -37,12 +37,36 @@ public class AnimeHandler {
 
     private final List<String> TYPE_LIST = new ArrayList<String>(List.of("*", "tv", "movie", "ova"));
 
+    private String requetValue = "";
+    private String typeValue = "";
+    private String ratedValue = "";
+
+
     public void animeMainMenuHandler(){
+        defaultValue();
         String commande = "";
         while(!commande.equals("q")){
             printMainMenu();
             commande = getCommandLineInput();
+
+            switch (commande){
+                case TYPE_KEY:
+                    typeHandler();
+                    break;
+            }
         }
+    }
+
+    private void typeHandler(){
+        String commande = "";
+        System.out.println("Enter type");
+        printChoice(TYPE_LIST);
+        commande = getCommandLineInput();
+
+        if(isTypeAccepted(commande))
+            typeValue = commande;
+        else
+            System.out.println("Type " + commande + " is not allow.");
     }
 
     private void printMainMenu(){
@@ -50,18 +74,18 @@ public class AnimeHandler {
         System.out.println();
         System.out.println();
         System.out.println(LINE);
-        System.out.println(REQUETE_KEY  + ". Requete : ''");
-        System.out.println(TYPE_KEY     + ". Type    : '*'");
-        System.out.println(RATED_KEY    + ". Rated   : '*'");
+        System.out.println(REQUETE_KEY  + ". Requete : '" + requetValue + "'");
+        System.out.println(TYPE_KEY     + ". Type    : '" + typeValue + "'");
+        System.out.println(RATED_KEY    + ". Rated   : '" + ratedValue + "'");
         System.out.println(LINE);
         System.out.println(RECHERCHE_KEY + ". Rechercher");
         System.out.println(QUITTER_KEY + ". Quitter");
         System.out.println(LINE);
         printChoice(MAIN_MENU_LIST);
-        System.out.println("Enter command → ");
     }
 
     private String getCommandLineInput(){
+        System.out.print("Enter command → ");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         String command = "";
@@ -106,5 +130,11 @@ public class AnimeHandler {
             case 503 : return "Something is not working on MyAnimeList’s end. MyAnimeList is either down/unavailable or is refusing to connect.";
             default: return "Status Code Not Found.";
         }
+    }
+
+    private void defaultValue(){
+        requetValue = "";
+        typeValue = "*";
+        ratedValue = "*";
     }
 }
