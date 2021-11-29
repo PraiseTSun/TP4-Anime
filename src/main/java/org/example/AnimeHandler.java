@@ -27,7 +27,7 @@ public class AnimeHandler {
     private final String RATED_KEY = "c";
     private final String RECHERCHE_KEY = "r";
     private final String QUITTER_KEY = "q";
-    private final List<String> CHOOSE_LIST = new ArrayList<>(List.of(
+    private final List<String> MAIN_MENU_LIST = new ArrayList<>(List.of(
             REQUETE_KEY,
             TYPE_KEY,
             RATED_KEY,
@@ -57,13 +57,7 @@ public class AnimeHandler {
         System.out.println(RECHERCHE_KEY + ". Rechercher");
         System.out.println(QUITTER_KEY + ". Quitter");
         System.out.println(LINE);
-        System.out.print("Choose one of : ");
-        for (int i = 0; i < CHOOSE_LIST.size(); i++) {
-            System.out.print(CHOOSE_LIST.get(i));
-            if(i != CHOOSE_LIST.size()-1)
-                System.out.print(",");
-        }
-        System.out.println();
+        printChoose((ArrayList) MAIN_MENU_LIST);
         System.out.println("Enter command → ");
     }
 
@@ -88,6 +82,16 @@ public class AnimeHandler {
         if (statusCode == 200)
             return true;
         return false;
+    }
+
+    private void printChoose (ArrayList elements){
+        System.out.print("Choose one of : ");
+        for (int i = 0; i < elements.size(); i++) {
+            System.out.print(elements.get(i));
+            if(i != elements.size()-1)
+                System.out.print(",");
+        }
+        System.out.println();
     }
 
     private String getStatusCode (int statusCode){
