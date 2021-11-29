@@ -96,13 +96,9 @@ public class AnimeHandler {
         }
     }
 
-    private void getCharacters(int id) throws Exception {
+    private AnimeCharacters getCharacters(int id) throws Exception {
         //Etaoe 1 - creation de la requete
-        URL url = new URL(JIKAN_URL + SEARCH_EXTENTION + TYPE +
-                STRING_SEARCH_EXTENTION + URLEncoder.encode(requetValue, StandardCharsets.UTF_8) +
-                "&type=" + typeValue +
-                "&rated=" + ratedValue
-        );
+        URL url = new URL(JIKAN_URL + TYPE + "/" + id + "characters_staff");
         HttpURLConnection conn = (HttpsURLConnection) url.openConnection();
 
         //Etape 2 - Parametrer la requete
@@ -123,9 +119,11 @@ public class AnimeHandler {
         }
 
         ObjectMapper mapper = new ObjectMapper();
-        rechercheResult = mapper.readValue(content, JikanResult.class);
+        AnimeCharacters characters = mapper.readValue(content, AnimeCharacters.class);
         //Etape 4 - Fermer la connexion
         conn.disconnect();
+
+        return characters;
     }
 
     private void rechercheHandler() throws Exception {
