@@ -69,29 +69,7 @@ public class AnimeHandler {
             System.out.println("Type " + commande + " is not allow.");
     }
 
-    private void printMainMenu(){
-        System.out.println(PROGRAMME_TITLE);
-        System.out.println();
-        System.out.println();
-        System.out.println(LINE);
-        System.out.println(REQUETE_KEY  + ". Requete : '" + requetValue + "'");
-        System.out.println(TYPE_KEY     + ". Type    : '" + typeValue + "'");
-        System.out.println(RATED_KEY    + ". Rated   : '" + ratedValue + "'");
-        System.out.println(LINE);
-        System.out.println(RECHERCHE_KEY + ". Rechercher");
-        System.out.println(QUITTER_KEY + ". Quitter");
-        System.out.println(LINE);
-        printChoice(MAIN_MENU_LIST);
-    }
 
-    private String getCommandLineInput(){
-        System.out.print("Enter command → ");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
-        String command = "";
-        try {command = reader.readLine();} catch (IOException e) {}
-        return command;
-    }
 
     private boolean isTypeAccepted (String type) {
         for (String element : TYPE_LIST) {
@@ -118,6 +96,21 @@ public class AnimeHandler {
         System.out.println();
     }
 
+    private void printMainMenu(){
+        System.out.println(PROGRAMME_TITLE);
+        System.out.println();
+        System.out.println();
+        System.out.println(LINE);
+        System.out.println(REQUETE_KEY  + ". Requete : '" + requetValue + "'");
+        System.out.println(TYPE_KEY     + ". Type    : '" + typeValue + "'");
+        System.out.println(RATED_KEY    + ". Rated   : '" + ratedValue + "'");
+        System.out.println(LINE);
+        System.out.println(RECHERCHE_KEY + ". Rechercher");
+        System.out.println(QUITTER_KEY + ". Quitter");
+        System.out.println(LINE);
+        printChoice(MAIN_MENU_LIST);
+    }
+
     private String getStatusCode (int statusCode){
         switch (statusCode){
             case 200 : return "The request was successful.";
@@ -132,7 +125,16 @@ public class AnimeHandler {
         }
     }
 
-    private void defaultValue(){
+    private String getCommandLineInput(){
+        System.out.print("Enter command → ");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        String command = "";
+        try {command = reader.readLine();} catch (IOException e) {}
+        return command;
+    }
+
+    private void defaultValues(){
         requetValue = "";
         typeValue = "*";
         ratedValue = "*";
