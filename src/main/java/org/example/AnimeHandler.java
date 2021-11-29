@@ -13,7 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AnimeHandler {
-    private final String JIKAN_URL = "https://api.jikan.moe/v3/anime";
+    private final String JIKAN_URL = "https://api.jikan.moe/v3";
+    private final String TYPE = "/anime";
+    private final String SEARCH_EXTENTION = "/search";
+
     private final String PROGRAMME_TITLE = "****************************************************************\n" +
                                            "*                  ANIME API QUERY PRO V1.4                    *\n" +
                                            "****************************************************************";
@@ -31,24 +34,11 @@ public class AnimeHandler {
             QUITTER_KEY
     ));
 
-    private URL jikanUrl;
-    private HttpURLConnection conn;
-
-    public void animeMain() throws Exception {
-        jikanUrl = new URL("https://api.jikan.moe/v3/anime" +
-                "/-1");
-        conn = (HttpsURLConnection) jikanUrl.openConnection();
-        System.out.println(jikanUrl);
-        int statusCode = conn.getResponseCode();
-        System.out.println(getStatusCode(statusCode));
-        try(BufferedReader r = new BufferedReader(new InputStreamReader(conn.getInputStream()))){
-            String line;
-            while((line = r.readLine()) != null)
-                System.out.println(line);
-        }
-        while(true){
+    public void animeMain(){
+        String commande = "";
+        while(commande != "q"){
             printMainMenu();
-            getCommandLineInput();
+            commande = getCommandLineInput();
         }
     }
 
@@ -84,7 +74,7 @@ public class AnimeHandler {
 
     private boolean isStatusCodeAccepted (int statusCode){
         System.out.println(getStatusCode(statusCode));
-        if (statusCode = 200)
+        if (statusCode == 200)
             return true;
         return false;
     }
