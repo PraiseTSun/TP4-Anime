@@ -1,5 +1,6 @@
 package org.example;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -103,7 +104,7 @@ public class AnimeHandler {
     }
 
     private AnimeMoreInfo getMoreInfo(int id) throws Exception {
-        URL url = new URL(JIKAN_URL + TYPE + "/" + id + "/moreinfo");
+        URL url = new URL(JIKAN_URL + TYPE + "/" + id + "/");
         HttpURLConnection conn = (HttpsURLConnection) url.openConnection();
 
         conn.setRequestMethod("GET");
@@ -118,6 +119,7 @@ public class AnimeHandler {
         }
 
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         AnimeMoreInfo moreInfo = mapper.readValue(content, AnimeMoreInfo.class);
         //Etape 4 - Fermer la connexion
         conn.disconnect();
@@ -228,17 +230,23 @@ public class AnimeHandler {
     }
 
     private void printAnimeInfo(Anime anime){
-        AnimeCharacters characters = null;
+        AnimeCharacters characters = new AnimeCharacters();
         try { characters = getCharacters(anime.getMal_id()); } catch (Exception e) {
+            System.out.println(e);
+        }
+        AnimeMoreInfo moreInfo = new AnimeMoreInfo();
+        try {moreInfo = getMoreInfo(anime.getMal_id());} catch (Exception e) {
             System.out.println(e);
         }
 
         System.out.println(LINE_INFO);
-        System.out.println(anime.getTitle());
+        System.out.println(moreInfo.getTitle());
+        System.out.println(moreInfo.getTitle_english());
+        System.out.println(moreInfo.getTitle_japanese());
         System.out.println(LINE_INFO);
-        System.out.println(anime.getSynopsis());
+        System.out.println(moreInfo.getSynopsis());
         System.out.println(LINE_INFO);
-        try {System.out.println(getMoreInfo(anime.getMal_id()).getMoreinfo());} catch (Exception e) {}
+        System.out.println(moreInfo.getBackground());
         System.out.println(LINE_INFO);
         System.out.println("Main characters :");
         for (Character character : characters.getCharacters()){
