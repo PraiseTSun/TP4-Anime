@@ -185,6 +185,7 @@ public class AnimeHandler {
         }
 
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         rechercheResult = mapper.readValue(content, JikanResult.class);
         //Etape 4 - Fermer la connexion
         conn.disconnect();
