@@ -16,5 +16,21 @@ public class AnimeMoreInfo {
     private String source;
     private int episodes;
     private String status;
+    private boolean airing;
+    private Aired aired;
+    private String duration;
+    private String rating;
+    private float score;
+    private int score_by;
+    private int rank;
+    private int popularity;
+    private int members;
+    private int favorites;
+    private String synopsis;
+    private String background;
+    private String premiered;
+    private String broadcast;
+
+
 
 }
