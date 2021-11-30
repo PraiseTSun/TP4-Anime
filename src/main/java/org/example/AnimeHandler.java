@@ -146,6 +146,7 @@ public class AnimeHandler {
         }
 
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         AnimeCharacters characters = mapper.readValue(content, AnimeCharacters.class);
         //Etape 4 - Fermer la connexion
         conn.disconnect();
