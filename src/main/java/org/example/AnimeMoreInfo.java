@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Map;
+
 public class AnimeMoreInfo {
     private String request_hash;
     private boolean request_cached;
@@ -30,7 +32,14 @@ public class AnimeMoreInfo {
     private String background;
     private String premiered;
     private String broadcast;
-
-
-
+    private Map<String, Related[]> related;
+    private Related[] producers;
+    private Related[] licensors;
+    private Related[] studios;
+    private Related[] genres;
+    private Related[] explicit_genres;
+    private Related[] demographics;
+    private Related[] themes;
+    private String[] opening_themes;
+    private String[] ending_themes;
 }
