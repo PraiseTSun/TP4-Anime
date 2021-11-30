@@ -4,12 +4,12 @@ public class Prop {
     private Date from;
     private Date to;
 
-    public Creation() {
+    public Prop() {
         this.from = new Date();
         this.to = new Date();
     }
 
-    public Creation(Date from, Date to) {
+    public Prop(Date from, Date to) {
         this.from = from;
         this.to = to;
     }
