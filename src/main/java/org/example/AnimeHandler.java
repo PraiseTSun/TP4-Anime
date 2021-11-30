@@ -45,7 +45,6 @@ public class AnimeHandler {
     private String requetValue = "cowboy";
     private String typeValue = "tv";
     private String ratedValue = "g";
-    private JikanResult rechercheResult;
 
 
     public void animeMainMenuHandler(){
@@ -85,11 +84,15 @@ public class AnimeHandler {
         String commande = "";
         List<Anime> animesList= new ArrayList<>();
 
-        for (Anime a : rechercheResult.getResults()) {
-            if(isElementAccepted(a.getRated(), RATED_LIST))
-                animesList.add(a);
-            if(animesList.size() == 5)
-                break;
+        try {
+            for (Anime a : rechercheHandler().getResults()) {
+                if(isElementAccepted(a.getRated(), RATED_LIST))
+                    animesList.add(a);
+                if(animesList.size() == 5)
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         while(!commande.equals(QUITTER_KEY)){
@@ -150,7 +153,8 @@ public class AnimeHandler {
         return characters;
     }
 
-    private void rechercheHandler() throws Exception {
+    private JikanResult rechercheHandler() throws Exception {
+        JikanResult rechercheResult = new JikanResult();
         String link = JIKAN_URL + SEARCH_EXTENTION + TYPE;
 
         link += STRING_SEARCH_EXTENTION + URLEncoder.encode(requetValue, StandardCharsets.UTF_8);
@@ -172,7 +176,7 @@ public class AnimeHandler {
         int statusCode = conn.getResponseCode();
         if(!isStatusCodeAccepted(statusCode)){
             conn.disconnect();
-            return;
+            return rechercheResult;
         }
 
 
@@ -189,6 +193,8 @@ public class AnimeHandler {
         rechercheResult = mapper.readValue(content, JikanResult.class);
         //Etape 4 - Fermer la connexion
         conn.disconnect();
+
+        return rechercheResult;
     }
 
     private void typeHandler(){
