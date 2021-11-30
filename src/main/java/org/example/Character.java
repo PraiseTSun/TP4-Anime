@@ -10,7 +10,7 @@ public class Character {
         this.role = "";
     }
 
-    public Character(int mal_id, String url, String image_url, String name, String role, VoiceActor[] voice_actors) {
+    public Character(String name, String role) {
         this.name = name;
         this.role = role;
     }
