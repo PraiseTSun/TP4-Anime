@@ -124,12 +124,18 @@ public class AnimeHandler {
     }
 
     private void rechercheHandler() throws Exception {
-        //Etaoe 1 - creation de la requete
-        URL url = new URL(JIKAN_URL + SEARCH_EXTENTION + TYPE +
-                STRING_SEARCH_EXTENTION + URLEncoder.encode(requetValue, StandardCharsets.UTF_8) +
-                "&type=" + typeValue +
-                "&rated=" + ratedValue
-                );
+        String link = JIKAN_URL + SEARCH_EXTENTION + TYPE;
+
+        link += STRING_SEARCH_EXTENTION + URLEncoder.encode(requetValue, StandardCharsets.UTF_8);
+
+        if(!typeValue.equals("*"))
+            link += "&type=" + typeValue;
+
+        if(!ratedValue.equals("*"))
+            link += "&rated=" + ratedValue;
+
+        System.out.println(link);
+        URL url = new URL(link);
         HttpURLConnection conn = (HttpsURLConnection) url.openConnection();
 
         //Etape 2 - Parametrer la requete
