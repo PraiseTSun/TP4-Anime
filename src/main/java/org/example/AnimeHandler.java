@@ -195,12 +195,21 @@ public class AnimeHandler {
     }
 
     private void printAnimeInfo(Anime anime){
-        AnimeCharacters characters;
+        AnimeCharacters characters = null;
         try { characters = getCharacters(anime.getMal_id()); } catch (Exception e) {
             System.out.println(e);
         }
 
         System.out.println(LINE_INFO);
+        System.out.println(anime.getTitle());
+        System.out.println(LINE_INFO);
+        System.out.println(LINE_INFO);
+        System.out.println(LINE_INFO);
+        System.out.println("Main characters :");
+        for (Character character : characters.getCharacters()){
+            if(character.getRole().equals("Main"))
+                System.out.println(character.getName());
+        }
         System.out.println(LINE_INFO);
     }
 
