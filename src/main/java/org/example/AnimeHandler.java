@@ -104,7 +104,7 @@ public class AnimeHandler {
     }
 
     private AnimeMoreInfo getMoreInfo(int id) throws Exception {
-        URL url = new URL(JIKAN_URL + TYPE + "/" + id + "/");
+        URL url = new URL(JIKAN_URL + TYPE + "/" + id);
         HttpURLConnection conn = (HttpsURLConnection) url.openConnection();
 
         conn.setRequestMethod("GET");
