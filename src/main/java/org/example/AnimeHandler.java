@@ -95,8 +95,10 @@ public class AnimeHandler {
             printResultsAnalyse(animesList);
             commande = getCommandLineInput();
 
-            if(!commande.equals(QUITTER_KEY))
+            if(!commande.equals(QUITTER_KEY)){
                 printAnimeInfo(animesList.get(Integer.parseInt(commande) - 1));
+                getCommandLineInput();
+            }
         }
     }
 
@@ -143,8 +145,10 @@ public class AnimeHandler {
 
         //Etape 3 - Envoyer la requete et gerer la reponse
         int statusCode = conn.getResponseCode();
-        if(!isStatusCodeAccepted(statusCode))
+        if(!isStatusCodeAccepted(statusCode)){
+            conn.disconnect();
             return;
+        }
 
 
         String content = "";
@@ -209,6 +213,7 @@ public class AnimeHandler {
         System.out.println(LINE_INFO);
         System.out.println(anime.getTitle());
         System.out.println(LINE_INFO);
+        System.out.println(anime.getSynopsis());
         System.out.println(LINE_INFO);
         System.out.println(LINE_INFO);
         System.out.println("Main characters :");
@@ -217,6 +222,7 @@ public class AnimeHandler {
                 System.out.println(character.getName());
         }
         System.out.println(LINE_INFO);
+        System.out.println("Press <enter> to go back to results.");
     }
 
     private void printChoice (List<String> elements){
