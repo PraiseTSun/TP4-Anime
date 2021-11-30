@@ -248,13 +248,22 @@ public class AnimeHandler {
         }
 
         System.out.println(LINE_INFO);
-        System.out.println(moreInfo.getTitle());
-        System.out.println(moreInfo.getTitle_english());
-        System.out.println(moreInfo.getTitle_japanese());
+        if(moreInfo.getTitle() != null)
+            System.out.println(moreInfo.getTitle());
+        if(moreInfo.getTitle_english() != null)
+            System.out.println(moreInfo.getTitle_english());
+        if(moreInfo.getTitle_japanese() != null)
+            System.out.println(moreInfo.getTitle_japanese());
         System.out.println(LINE_INFO);
-        System.out.println(moreInfo.getSynopsis());
+        if(moreInfo.getSynopsis() != null)
+            System.out.println(moreInfo.getSynopsis());
+        else
+            System.out.println("Information not available.");
         System.out.println(LINE_INFO);
-        System.out.println(moreInfo.getBackground());
+        if(moreInfo.getBackground() != null)
+            System.out.println(moreInfo.getBackground());
+        else
+            System.out.println("Information not available.");
         System.out.println(LINE_INFO);
         System.out.println("Main characters :");
         for (Character character : characters.getCharacters()){
