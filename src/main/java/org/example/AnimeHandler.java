@@ -102,6 +102,29 @@ public class AnimeHandler {
         }
     }
 
+    private AnimeMoreInfo getMoreInfo(int id) throws Exception {
+        URL url = new URL(JIKAN_URL + TYPE + "/" + id + "/moreinfo");
+        HttpURLConnection conn = (HttpsURLConnection) url.openConnection();
+
+        conn.setRequestMethod("GET");
+
+
+        String content = "";
+        try(BufferedReader r = new BufferedReader(new InputStreamReader(conn.getInputStream()))){
+            String line;
+            while((line = r.readLine()) != null){
+                content += line;
+            }
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        AnimeMoreInfo moreInfo = mapper.readValue(content, AnimeMoreInfo.class);
+        //Etape 4 - Fermer la connexion
+        conn.disconnect();
+
+        return moreInfo;
+    }
+
     private AnimeCharacters getCharacters(int id) throws Exception {
         URL url = new URL(JIKAN_URL + TYPE + "/" + id + "/characters_staff");
         HttpURLConnection conn = (HttpsURLConnection) url.openConnection();
@@ -215,6 +238,7 @@ public class AnimeHandler {
         System.out.println(LINE_INFO);
         System.out.println(anime.getSynopsis());
         System.out.println(LINE_INFO);
+        try {System.out.println(getMoreInfo(anime.getMal_id()).getMoreinfo());} catch (Exception e) {}
         System.out.println(LINE_INFO);
         System.out.println("Main characters :");
         for (Character character : characters.getCharacters()){
