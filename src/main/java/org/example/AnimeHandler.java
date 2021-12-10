@@ -166,7 +166,6 @@ public class AnimeHandler {
         if(!ratedValue.equals("*"))
             link += "&rated=" + ratedValue;
 
-        System.out.println(link);
         URL url = new URL(link);
         HttpURLConnection conn = (HttpsURLConnection) url.openConnection();
 
